@@ -1,0 +1,25 @@
+apiVersion: v1
+data:
+  root-cert.pem: |
+    -----BEGIN CERTIFICATE-----
+    MIIC/DCCAeSgAwIBAgIQbiewj8DrKzPqBhaZbwakdzANBgkqhkiG9w0BAQsFADAY
+    MRYwFAYDVQQKEw1jbHVzdGVyLmxvY2FsMB4XDTIxMTIwOTExMjM1M1oXDTMxMTIw
+    NzExMjM1M1owGDEWMBQGA1UEChMNY2x1c3Rlci5sb2NhbDCCASIwDQYJKoZIhvcN
+    AQEBBQADggEPADCCAQoCggEBANNVaKNubI2Ja3CowWKbzQtKjmC0POJlMWdZfd4P
+    3tpwwGJmXJMJlbU6uBL1Z7rR20rSzE/KGhho/ZaQCIR3KVYYt0QTNnSUtFumReuh
+    hsNulrIwij4n8d9XYqMcuvynLlEDyiU8qIjLzGmW/HJhsBBD8/yju3abpyJnnd+B
+    C9PIDjnb3vtsMn0l52zTkskFPQ8zKvsKsKMhmELbNjVRGB7kswQcUFfT2YEazDDr
+    IA//W/1TSbm6frtxcxkxDe3Z8q+Yxe2142+dtzp5AYHsxkApdS8KHR/bfD58LDlP
+    g5GyH5h43z+jxsACjirHs2rO79jBJZkp9S/kW4LTbaNJmAsCAwEAAaNCMEAwDgYD
+    VR0PAQH/BAQDAgIEMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFFksjWJyFtYg
+    vJIZoGJCXCiDVl2wMA0GCSqGSIb3DQEBCwUAA4IBAQCo9OS+Wcxgyp4Omukv3ylB
+    Up7KrAj08MNezXK+dw2PZkQTkgNpjoexu3rF6EhazMVVb2rO4z64swoX/qVaDDx4
+    Ths9WtwcktEaKAsuH/o3h0u15AXvn/7thntgagGkx3l+NdpJMihwnxj5kOXgBsiK
+    B/BlWwdEAr4TXYmrbEVJZH1cJ24JJcBfjqiJXiIumbA/T0uNV1T7jVvn1UQBBLY8
+    zeZElbAZs2hQxaWgELiNJQRIraFXh4JzPRC56RGxBCTxMBxfL6n+nd/EEUC0XUCG
+    qNz3LnfV5cuvggiHY9fK+FbHaf/4UaBXocWOAqX85oFnNliq8ogg9RIIdVNDWN/d
+    -----END CERTIFICATE-----
+kind: ConfigMap
+metadata:
+  name: istio-ca-root-cert
+  namespace: folio

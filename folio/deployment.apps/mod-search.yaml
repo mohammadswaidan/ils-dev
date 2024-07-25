@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mod-search
+  namespace: folio
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-folio-mod-search
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-folio-mod-search
+    spec:
+      containers:
+        - env:
+            - name: INITIAL_LANGUAGES
+              value: eng,ara,fre
+            - name: INSTANCE_SUBJECTS_INDEXING_RETRY_ATTEMPTS
+              value: "2"
+            - name: KAFKA_EVENTS_CONCURRENCY
+              value: "2"
+            - name: KAFKA_AUTHORITIES_CONCURRENCY
+              value: "2"
+            - name: SPRING_KAFKA_CONSUMER_MAX-POLL-RECORDS
+              value: "50"
+          envFrom:
+            - secretRef:
+                name: db-connect
+                optional: false
+            - secretRef:
+                name: mod-search
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-search:3.2.6.1.1.5
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 10
+            httpGet:
+              path: /admin/health
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: mod-search
+          ports:
+            - containerPort: 8081
+              name: 8081tcp2
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /admin/health
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 5000Mi
+            requests:
+              cpu: 20m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: {}
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          startupProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /admin/health
+              port: 8081
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          stdin: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          tty: true
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: oracle-reg
+      nodeSelector:
+        product: ils
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      tolerations:
+        - effect: NoExecute
+          key: product
+          operator: Equal
+          value: ils

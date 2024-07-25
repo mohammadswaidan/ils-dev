@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mod-service-interaction
+  namespace: folio
+spec:
+  minReadySeconds: 30
+  progressDeadlineSeconds: 300
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-folio-mod-service-interaction
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        workload: folio_module
+        workload.user.cattle.io/workloadselector: apps.deployment-folio-mod-service-interaction
+      namespace: folio
+    spec:
+      containers:
+        - env:
+            - name: server.port
+              value: "8081"
+            - name: OKAPI_SERVICE_PORT
+              value: "9130"
+            - name: OKAPI_SERVICE_HOST
+              value: okapi
+            - name: JAVA_OPTIONS
+              value: -server -XX:+UseContainerSupport -XX:MaxRAMPercentage=55.0 -XX:+PrintFlagsFinal
+            - name: EVENTS_PU
+              value: kafka2-headless.kafka-cluster.svc.cluster.local:9092
+            - name: EVENTS_CONSUMER_BOOTSTRAP_SERVERS
+              value: kafka2-headless.kafka-cluster.svc.cluster.local:9092
+            - name: EVENTS_PUBLISHER_ZK_CONNECT
+              value: kafka-zookeeper-headless:9092
+            - name: EVENTS_CONSUMER_ZK_CONNECT
+              value: kafka-zookeeper-headless:9092
+          envFrom:
+            - secretRef:
+                name: db-connect
+                optional: true
+          image: folioorg/mod-service-interaction:4.0.2
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 10
+            httpGet:
+              path: /admin/health
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: mod-service-interaction
+          ports:
+            - containerPort: 8081
+              name: http
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /admin/health
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 300m
+              memory: 5000Mi
+            requests:
+              cpu: 20m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: {}
+            privileged: false
+            procMount: Default
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          startupProbe:
+            failureThreshold: 20
+            httpGet:
+              path: /admin/health
+              port: 8081
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
+          stdin: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          tty: true
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        product: ils
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      tolerations:
+        - effect: NoExecute
+          key: product
+          operator: Equal
+          value: ils

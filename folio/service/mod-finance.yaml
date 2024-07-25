@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mod-finance
+  namespace: folio
+spec:
+  ports:
+    - name: default
+      port: 42
+      protocol: TCP
+      targetPort: 42
+  selector:
+    workload.user.cattle.io/workloadselector: deployment-folio-mod-finance
+  sessionAffinity: None
+  type: ClusterIP

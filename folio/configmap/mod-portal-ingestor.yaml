@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  org.naseej.ingestor.server.url: https://portal-ingestor.medadstg.com
+kind: ConfigMap
+metadata:
+  name: mod-portal-ingestor
+  namespace: folio

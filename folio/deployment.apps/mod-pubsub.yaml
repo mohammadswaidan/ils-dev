@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mod-pubsub
+  namespace: folio
+spec:
+  minReadySeconds: 30
+  progressDeadlineSeconds: 300
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-folio-mod-pubsub
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        workload: folio_module
+        workload.user.cattle.io/workloadselector: deployment-folio-mod-pubsub
+    spec:
+      affinity: {}
+      containers:
+        - env:
+            - name: SYSTEM_USER_NAME
+              value: pub-sub
+            - name: SYSTEM_USER_PASSWORD
+              value: pubsub
+          envFrom:
+            - secretRef:
+                name: db-connect
+                optional: true
+          image: jed.ocir.io/axhxgarudf1b/mod-pubsub:2.13.1.1.0.0
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 10
+            httpGet:
+              path: /admin/health
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: mod-pubsub
+          readinessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /admin/health
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 200m
+              memory: 5000Mi
+            requests:
+              cpu: 20m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: {}
+            privileged: false
+            procMount: Default
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          startupProbe:
+            failureThreshold: 20
+            httpGet:
+              path: /admin/health
+              port: 8081
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          stdin: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          tty: true
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: dockerhub
+        - name: oracle-reg
+      nodeSelector:
+        product: ils
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      tolerations:
+        - effect: NoExecute
+          key: product
+          operator: Equal
+          value: ils
