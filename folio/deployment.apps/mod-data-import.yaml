@@ -83,18 +83,3 @@ spec:
       dnsPolicy: ClusterFirst
       imagePullSecrets:
         - name: oracle-reg
-      nodeSelector:
-        product: ils
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-      tolerations:
-        - effect: NoExecute
-          key: product
-          operator: Equal
-          value: ils
-      volumes:
-        - name: mod-data-import
-          persistentVolumeClaim:
-            claimName: medad-ils

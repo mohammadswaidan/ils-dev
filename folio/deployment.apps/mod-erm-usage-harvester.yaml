@@ -87,19 +87,3 @@ spec:
               name: vol-lkbrk
               subPath: hazelcast.conf
       dnsPolicy: ClusterFirst
-      nodeSelector:
-        product: ils
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-      tolerations:
-        - effect: NoExecute
-          key: product
-          operator: Equal
-          value: ils
-      volumes:
-        - configMap:
-            defaultMode: 420
-            name: mod-erm-usage-harvester
-          name: vol-lkbrk
