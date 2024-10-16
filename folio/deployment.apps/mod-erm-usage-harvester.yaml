@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 3
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -19,13 +19,13 @@ spec:
       namespace: folio
     spec:
       containers:
-        - envFrom:
+        - env:
+            - name: JAVA_OPTIONS
+              value: -Dhazelcast.config=/hazelcast/hazelcast.xml
+          envFrom:
             - secretRef:
                 name: db-connect
                 optional: true
-            - configMapRef:
-                name: mod-erm-usage-harvester
-                optional: false
           image: folioorg/mod-erm-usage-harvester:4.5.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -41,6 +41,9 @@ spec:
           ports:
             - containerPort: 8081
               name: http
+              protocol: TCP
+            - containerPort: 5701
+              name: http1
               protocol: TCP
           readinessProbe:
             failureThreshold: 5
@@ -79,6 +82,10 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           tty: true
+          volumeMounts:
+            - mountPath: /hazelcast/hazelcast.xml
+              name: vol-lkbrk
+              subPath: hazelcast.conf
       dnsPolicy: ClusterFirst
       nodeSelector:
         product: ils
@@ -91,3 +98,8 @@ spec:
           key: product
           operator: Equal
           value: ils
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: mod-erm-usage-harvester
+          name: vol-lkbrk

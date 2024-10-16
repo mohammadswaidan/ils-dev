@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -16,17 +16,24 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: deployment-folio-mod-circulation
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - env:
             - name: JAVA_OPTIONS
               value: -Dhttp.port=8081
+            - name: CHECK_OUT_BY_BARCODE_BY_MEDAD
+              value: "false"
+            - name: CHECK_IN_BY_BARCODE_BY_MEDAD
+              value: "false"
           envFrom:
             - secretRef:
                 name: db-connect
                 optional: true
-          image: jed.ocir.io/axhxgarudf1b/mod-circulation:24.2.5.1.0.1
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-circulation:24.2.5.1.1.1
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10

@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -16,9 +16,15 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: deployment-folio-mod-users
+      namespace: folio
     spec:
       containers:
-        - envFrom:
+        - env:
+            - name: NEW_RELIC_APPLICATION_LOGGING_FORWARDING_ENABLED
+              value: "true"
+            - name: NEW_RELIC_LOG_LEVEL
+              value: WARNING
+          envFrom:
             - secretRef:
                 name: db-connect
                 optional: true
@@ -28,7 +34,10 @@ spec:
             - secretRef:
                 name: mod-users
                 optional: false
-          image: jed.ocir.io/axhxgarudf1b/mod-users:19.3.1.1.0.4
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-users:19.3.1.1.0.9
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10

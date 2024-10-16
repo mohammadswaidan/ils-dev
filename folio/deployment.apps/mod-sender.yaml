@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -17,14 +17,14 @@ spec:
       labels:
         workload: folio_module
         workload.user.cattle.io/workloadselector: deployment-folio-mod-sender
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - envFrom:
             - secretRef:
                 name: db-connect
                 optional: true
-          image: folioorg/mod-sender:1.12.0
+          image: jed.ocir.io/axhxgarudf1b/mod-sender:1.12.0.1.0.1
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10
@@ -74,6 +74,8 @@ spec:
           terminationMessagePolicy: File
           tty: true
       dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: oracle-reg
       nodeSelector:
         product: ils
       restartPolicy: Always

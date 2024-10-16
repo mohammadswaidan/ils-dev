@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -17,15 +17,18 @@ spec:
       labels:
         workload: folio_module
         workload.user.cattle.io/workloadselector: deployment-folio-mod-users-bl
+      namespace: folio
     spec:
-      affinity: {}
       containers:
-        - envFrom:
+        - env:
+            - name: TWO_FACTOR_ENABLED
+              value: "true"
+          envFrom:
             - secretRef:
                 name: db-connect
                 optional: true
-          image: folioorg/mod-users-bl:7.7.1
-          imagePullPolicy: IfNotPresent
+          image: jed.ocir.io/axhxgarudf1b/mod-users-bl:7.7.4.1.0.10
+          imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10
             httpGet:
@@ -74,6 +77,8 @@ spec:
           terminationMessagePolicy: File
           tty: true
       dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: oracle-reg
       nodeSelector:
         product: ils
       restartPolicy: Always

@@ -5,7 +5,7 @@ metadata:
   namespace: folio
 spec:
   progressDeadlineSeconds: 600
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -15,8 +15,8 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: deployment-folio-mod-label-printing
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - env:
             - name: CHROME_DRIVER_PATH
@@ -30,7 +30,10 @@ spec:
             - secretRef:
                 name: db-connect
                 optional: false
-          image: jed.ocir.io/axhxgarudf1b/mod-label-printing:3.6.6
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-label-printing:3.8.2
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10
@@ -53,8 +56,8 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 200m
-              memory: 1000Mi
+              cpu: 300m
+              memory: 2000Mi
             requests:
               cpu: 10m
               memory: 100Mi

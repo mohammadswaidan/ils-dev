@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -16,17 +16,20 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: deployment-folio-mod-authtoken
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - env:
             - name: JAVA_OPTIONS
-              value: -Djwt.signing.key=CorrectBatteryHorseStaple  -Dlog.level=debug
+              value: -Djwt.signing.key=CorrectBatteryHorseStaple  -javaagent:/usr/local/newrelic/newrelic.jar
           envFrom:
             - secretRef:
                 name: db-connect
                 optional: true
-          image: jed.ocir.io/axhxgarudf1b/mod-authtoken:2.15.1.1.0.1
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-authtoken:2.15.1.1.0.4
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10

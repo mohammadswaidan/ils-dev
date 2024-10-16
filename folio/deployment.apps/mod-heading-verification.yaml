@@ -5,7 +5,7 @@ metadata:
   namespace: folio
 spec:
   progressDeadlineSeconds: 600
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -15,14 +15,17 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: deployment-folio-mod-heading-verification
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - envFrom:
             - configMapRef:
                 name: mod-heading-verification
                 optional: false
-          image: jed.ocir.io/axhxgarudf1b/mod-heading-verification:2.5.5
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-heading-verification:2.6.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10
@@ -45,7 +48,7 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 200m
+              cpu: 350m
               memory: 5000Mi
             requests:
               cpu: 20m

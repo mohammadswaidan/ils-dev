@@ -5,7 +5,7 @@ metadata:
   namespace: folio
 spec:
   progressDeadlineSeconds: 600
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -15,8 +15,8 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: apps.deployment-folio-mod-worklists
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - envFrom:
             - secretRef:
@@ -27,7 +27,10 @@ spec:
             - secretRef:
                 name: oci-object-storage
                 optional: false
-          image: jed.ocir.io/axhxgarudf1b/mod-worklists:3.5.1
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-worklists:3.5.9
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10

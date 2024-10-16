@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -16,6 +16,7 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: deployment-folio-mod-source-record-manager
+      namespace: folio
     spec:
       affinity:
         podAffinity: {}
@@ -35,7 +36,10 @@ spec:
             - secretRef:
                 name: db-connect
                 optional: true
-          image: folioorg/mod-source-record-manager:3.8.5
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-source-record-manager:3.8.6.1.0.9
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10

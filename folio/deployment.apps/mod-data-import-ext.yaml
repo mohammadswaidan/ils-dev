@@ -5,7 +5,7 @@ metadata:
   namespace: folio
 spec:
   progressDeadlineSeconds: 600
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -15,14 +15,17 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: apps.deployment-folio-mod-data-import-ext
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - envFrom:
             - secretRef:
                 name: db-connect
                 optional: false
-          image: jed.ocir.io/axhxgarudf1b/mod-data-import-ext:1.4.4
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-data-import-ext:1.5.4
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10

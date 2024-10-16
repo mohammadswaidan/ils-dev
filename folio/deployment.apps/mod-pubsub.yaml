@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -17,8 +17,8 @@ spec:
       labels:
         workload: folio_module
         workload.user.cattle.io/workloadselector: deployment-folio-mod-pubsub
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - env:
             - name: SYSTEM_USER_NAME
@@ -29,7 +29,10 @@ spec:
             - secretRef:
                 name: db-connect
                 optional: true
-          image: jed.ocir.io/axhxgarudf1b/mod-pubsub:2.13.1.1.0.0
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-pubsub:2.13.1.1.0.3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10

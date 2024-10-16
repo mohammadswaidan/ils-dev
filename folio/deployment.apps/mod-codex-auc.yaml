@@ -5,7 +5,7 @@ metadata:
   namespace: folio
 spec:
   progressDeadlineSeconds: 600
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -15,8 +15,8 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: deployment-folio-mod-codex-auc
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - env:
             - name: org.naseej.auc.service.url
@@ -25,7 +25,11 @@ spec:
                   key: org.naseej.auc.service.url
                   name: mod-codex-auc
                   optional: false
-          image: jed.ocir.io/axhxgarudf1b/mod-codex-auc:1.6.0
+          envFrom:
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-codex-auc:1.6.7
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10
@@ -52,8 +56,8 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 200m
-              memory: 5000Mi
+              cpu: 300m
+              memory: 7000Mi
             requests:
               cpu: 20m
               memory: 128Mi

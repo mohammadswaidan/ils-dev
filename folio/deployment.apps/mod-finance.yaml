@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -17,8 +17,8 @@ spec:
       labels:
         workload: folio_module
         workload.user.cattle.io/workloadselector: deployment-folio-mod-finance
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - env:
             - name: TZ
@@ -27,7 +27,10 @@ spec:
             - secretRef:
                 name: db-connect
                 optional: true
-          image: jed.ocir.io/axhxgarudf1b/mod-finance:4.9.0.1.0.0
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-finance:4.9.0.1.0.4
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10

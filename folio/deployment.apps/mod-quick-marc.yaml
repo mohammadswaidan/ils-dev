@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -16,8 +16,8 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: deployment-folio-mod-quick-marc
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - env:
             - name: spring.jpa.show-sql
@@ -26,7 +26,7 @@ spec:
             - secretRef:
                 name: db-connect
                 optional: true
-          image: jed.ocir.io/axhxgarudf1b/mod-quick-marc:5.1.1.1.0.0
+          image: jed.ocir.io/axhxgarudf1b/mod-quick-marc:5.1.1.1.0.4
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10

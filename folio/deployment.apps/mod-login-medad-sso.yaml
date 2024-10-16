@@ -5,7 +5,7 @@ metadata:
   namespace: folio
 spec:
   progressDeadlineSeconds: 600
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -15,8 +15,8 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: apps.deployment-folio-mod-login-medad-sso
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - envFrom:
             - secretRef:
@@ -25,7 +25,7 @@ spec:
             - configMapRef:
                 name: mod-login-medad-sso
                 optional: false
-          image: jed.ocir.io/axhxgarudf1b/mod-login-medad-sso:1.3.0
+          image: jed.ocir.io/axhxgarudf1b/mod-login-medad-sso:1.3.5
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10
@@ -48,8 +48,8 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 200m
-              memory: 5000Mi
+              cpu: 350m
+              memory: 6000Mi
             requests:
               cpu: 20m
               memory: 128Mi

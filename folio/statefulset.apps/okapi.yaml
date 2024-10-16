@@ -8,7 +8,7 @@ spec:
     whenDeleted: Retain
     whenScaled: Retain
   podManagementPolicy: OrderedReady
-  replicas: 0
+  replicas: 3
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -47,7 +47,10 @@ spec:
             - secretRef:
                 name: okapi-config
                 optional: false
-          image: jed.ocir.io/axhxgarudf1b/okapi:5.3.0-cluster-zipkin
+            - secretRef:
+                name: new-relic-okapi
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/okapi:5.3.0-cluster-newrelic
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 20

@@ -5,7 +5,7 @@ metadata:
   namespace: folio
 spec:
   progressDeadlineSeconds: 600
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -15,6 +15,7 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: deployment-folio-mod-search
+      namespace: folio
     spec:
       containers:
         - env:
@@ -35,7 +36,7 @@ spec:
             - secretRef:
                 name: mod-search
                 optional: false
-          image: jed.ocir.io/axhxgarudf1b/mod-search:3.2.6.1.1.5
+          image: jed.ocir.io/axhxgarudf1b/mod-search:3.2.6.1.2.4
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10
@@ -62,7 +63,7 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 500m
+              cpu: 300m
               memory: 5000Mi
             requests:
               cpu: 20m
@@ -74,13 +75,13 @@ spec:
             readOnlyRootFilesystem: false
             runAsNonRoot: false
           startupProbe:
-            failureThreshold: 15
+            failureThreshold: 20
             httpGet:
               path: /admin/health
               port: 8081
               scheme: HTTP
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            initialDelaySeconds: 120
+            periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 1
           stdin: true

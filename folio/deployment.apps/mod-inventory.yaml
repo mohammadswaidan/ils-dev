@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -34,12 +34,15 @@ spec:
       containers:
         - env:
             - name: JAVA_OPTIONS
-              value: -Dorg.folio.metadata.inventory.storage.type=okapi -Dhttp.port=8081
+              value: -Dorg.folio.metadata.inventory.storage.type=okapi -Dhttp.port=8081 -javaagent:/usr/local/newrelic/newrelic.jar
           envFrom:
             - secretRef:
                 name: db-connect
                 optional: true
-          image: jed.ocir.io/axhxgarudf1b/mod-inventory:20.2.7.1.0.1
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-inventory:20.2.7.1.0.9
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10
@@ -66,8 +69,8 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 200m
-              memory: 5000Mi
+              cpu: 300m
+              memory: 7000Mi
             requests:
               cpu: 20m
               memory: 128Mi

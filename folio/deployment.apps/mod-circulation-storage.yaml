@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -16,14 +16,17 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: deployment-folio-mod-circulation-storage
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - envFrom:
             - secretRef:
                 name: db-connect
                 optional: true
-          image: jed.ocir.io/axhxgarudf1b/mod-circulation-storage:17.2.1.1.0.1
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-circulation-storage:17.2.1.1.0.5
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10

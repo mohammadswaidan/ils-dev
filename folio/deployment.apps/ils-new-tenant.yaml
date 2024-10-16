@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ils-new-tenant
+  namespace: folio
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-new-tenant-ils-new-tenant
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-new-tenant-ils-new-tenant
+      namespace: folio
+    spec:
+      containers:
+        - env:
+            - name: tenant
+              value: abc
+            - name: user
+              value: abc_admin
+            - name: password
+              value: dQErsX84fMQ@8r
+            - name: tenant_name
+              value: abc
+            - name: tenant_desc
+              value: abc
+          image: naseejsa/ils-oracle-tenant-provisoning:4.3
+          imagePullPolicy: Always
+          name: container-0
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: naseejsa
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

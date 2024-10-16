@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -16,6 +16,7 @@ spec:
       creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: deployment-folio-mod-source-record-storage
+      namespace: folio
     spec:
       affinity:
         podAffinity: {}
@@ -35,7 +36,10 @@ spec:
             - secretRef:
                 name: db-connect
                 optional: true
-          image: jed.ocir.io/axhxgarudf1b/mod-source-record-storage:5.8.5.1.0.4
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-source-record-storage:5.8.6.1.0.3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10
@@ -80,8 +84,8 @@ spec:
               path: /admin/health
               port: 8081
               scheme: HTTP
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            initialDelaySeconds: 60
+            periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 1
           stdin: true

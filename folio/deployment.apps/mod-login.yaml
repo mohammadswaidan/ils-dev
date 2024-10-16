@@ -6,7 +6,7 @@ metadata:
 spec:
   minReadySeconds: 30
   progressDeadlineSeconds: 300
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -17,18 +17,21 @@ spec:
       labels:
         workload: folio_module
         workload.user.cattle.io/workloadselector: deployment-folio-mod-login
+      namespace: folio
     spec:
-      affinity: {}
       containers:
         - env:
             - name: JAVA_OPTIONS
-              value: -Dlog4j.configurationFile=/tmp/log4j2.properties
+              value: -Dlog4j.configurationFile=/tmp/log4j2.properties -javaagent:/usr/local/newrelic/newrelic.jar
           envFrom:
             - secretRef:
                 name: db-connect
                 optional: true
-          image: folioorg/mod-login:7.11.0
-          imagePullPolicy: IfNotPresent
+            - secretRef:
+                name: new-relic
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-login:7.11.1.1.0.5
+          imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10
             httpGet:
@@ -77,6 +80,8 @@ spec:
           terminationMessagePolicy: File
           tty: true
       dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: oracle-reg
       nodeSelector:
         product: ils
       restartPolicy: Always
