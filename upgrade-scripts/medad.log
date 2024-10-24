@@ -1,0 +1,473 @@
+'medad'[ {
+  "id" : "4bf2a7fb-5b80-46f1-8e08-920f5878f887",
+  "complete" : false,
+  "startDate" : "2023-06-06T13:13:08.897370Z",
+  "modules" : [ {
+    "id" : "mod-agreements-5.2.2",
+    "from" : "mod-agreements-5.0.6",
+    "action" : "enable",
+    "stage" : "invoke"
+  }, {
+    "id" : "mod-assets-1.6.1",
+    "from" : "mod-assets-1.5.8",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-audit-2.5.0.1.0.1",
+    "from" : "mod-audit-2.2.2.1.0.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-authtoken-2.11.0",
+    "from" : "mod-authtoken-2.9.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-calendar-1.15.0",
+    "from" : "mod-calendar-1.13.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-circulation-storage-14.1.0.1.0.5",
+    "from" : "mod-circulation-storage-13.1.1.1.0.6",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-codex-auc-1.4.1",
+    "from" : "mod-codex-auc-1.1.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-codex-ekb-1.10.0",
+    "from" : "mod-codex-ekb-1.9.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-codex-inventory-2.3.0.1.0.1",
+    "from" : "mod-codex-inventory-2.1.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-codex-mux-2.12.0.1.0.0",
+    "from" : "mod-codex-mux-2.11.1.1.0.4",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-codex-z3950-3.0.11",
+    "from" : "mod-codex-z3950-3.0.9",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-configuration-5.8.0",
+    "from" : "mod-configuration-5.7.5",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-content-enrichment-1.0.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-copycat-1.3.0.1.0.0",
+    "from" : "mod-copycat-1.1.2.1.1.3",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-courses-1.4.5",
+    "from" : "mod-courses-1.4.3",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-data-export-worker-1.4.10",
+    "from" : "mod-data-export-worker-1.2.2",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-data-import-converter-storage-1.14.2.1.0.3",
+    "from" : "mod-data-import-converter-storage-1.12.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-data-import-user-handler-1.0.2",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-email-1.14.0",
+    "from" : "mod-email-1.12.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-erm-usage-4.4.0",
+    "from" : "mod-erm-usage-4.2.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-erm-usage-harvester-4.1.0",
+    "from" : "mod-erm-usage-harvester-3.1.4",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-event-config-2.3.0",
+    "from" : "mod-event-config-2.1.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-feesfines-18.0.2.1.1.0",
+    "from" : "mod-feesfines-17.0.2",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-circulation-23.1.5.1.0.0",
+    "from" : "mod-circulation-22.1.4",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-finance-storage-8.2.3.1.0.0",
+    "from" : "mod-finance-storage-8.0.3.1.0.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-eusage-reports-1.2.1",
+    "from" : "mod-eusage-reports-1.0.4",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-finance-4.5.2.1.0.1",
+    "from" : "mod-finance-4.4.0.1.0.2",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-graphql-1.10.2",
+    "from" : "mod-graphql-1.9.0",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-heading-verification-2.3.9",
+    "from" : "mod-heading-verification-2.3.6",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-inventory-18.2.2.1.0.3",
+    "from" : "mod-inventory-18.0.7",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-inventory-storage-24.1.0.1.1.3",
+    "from" : "mod-inventory-storage-22.0.4.1.0.5",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-inventory-update-2.2.0",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-invoice-storage-5.4.0",
+    "from" : "mod-invoice-storage-5.2.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-kb-ebsco-java-3.11.1",
+    "from" : "mod-kb-ebsco-java-3.9.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-label-printing-3.2.1",
+    "from" : "mod-label-printing-3.1.6",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-ldp-1.0.6",
+    "from" : "mod-ldp-1.0.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-licenses-4.2.1",
+    "from" : "mod-licenses-4.0.0",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-local-exchange-rates-1.0.4",
+    "from" : "mod-local-exchange-rates-1.0.3",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-login-7.7.0.1.0.0",
+    "from" : "mod-login-7.5.1.1.0.5",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-login-medad-sso-1.0.0",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-login-saml-2.1.2",
+    "action" : "uptodate",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-ncip-1.11.1",
+    "from" : "mod-ncip-1.9.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-notes-3.1.2",
+    "from" : "mod-notes-2.13.2",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-notify-2.11.0",
+    "from" : "mod-notify-2.9.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-oai-pmh-3.9.1",
+    "from" : "mod-oai-pmh-3.6.2",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-offline-circulation-0.0.4",
+    "from" : "mod-offline-circulation-0.0.3",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-orders-storage-13.3.3",
+    "from" : "mod-orders-storage-13.1.3",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-orders-12.4.3",
+    "from" : "mod-orders-12.2.5",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-data-export-spring-1.4.5",
+    "from" : "mod-data-export-spring-1.2.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-ebsconet-1.3.3",
+    "from" : "mod-ebsconet-1.1.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-gobi-2.4.3",
+    "from" : "mod-gobi-2.2.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-invoice-5.4.1",
+    "from" : "mod-invoice-5.2.5",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-organizations-storage-4.3.0",
+    "from" : "mod-organizations-storage-4.1.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-organizations-1.5.0",
+    "from" : "mod-organizations-1.3.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-password-validator-2.4.0",
+    "from" : "mod-password-validator-2.2.3",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-patron-5.3.0",
+    "from" : "mod-patron-5.0.3",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-patron-blocks-1.6.0",
+    "from" : "mod-patron-blocks-1.4.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-permissions-6.1.0",
+    "from" : "mod-permissions-5.14.4",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-portal-ingestor-1.2.2",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-pubsub-2.6.1.1.0.0",
+    "from" : "mod-pubsub-2.4.3.1.0.0",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-remote-storage-1.6.0",
+    "from" : "mod-remote-storage-1.4.2",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-reports-1.4.1",
+    "from" : "mod-reports-1.3.4",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-rtac-3.3.0",
+    "from" : "mod-rtac-3.1.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-scheduler-1.5.1",
+    "from" : "mod-scheduler-1.3.12",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-search-1.7.5.1.2.5",
+    "from" : "mod-search-1.5.4.1.2.0",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-data-export-4.5.1.1.0.1",
+    "from" : "mod-data-export-4.2.4",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-sender-1.8.0",
+    "from" : "mod-sender-1.6.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-service-interaction-1.1.0",
+    "from" : "mod-service-interaction-1.0.0",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-source-record-manager-3.4.5.1.0.9",
+    "from" : "mod-source-record-manager-3.2.8.1.0.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-data-import-2.5.0.1.0.2",
+    "from" : "mod-data-import-2.2.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-quick-marc-2.4.2.1.0.1",
+    "from" : "mod-quick-marc-2.2.4.1.0.5",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-data-import-ext-1.3.3",
+    "from" : "mod-data-import-ext-1.2.4",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-source-record-storage-5.4.2.1.0.1",
+    "from" : "mod-source-record-storage-5.2.8",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-tags-1.2.0",
+    "from" : "mod-tags-1.0.2",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-template-engine-1.17.0.1.0.0",
+    "from" : "mod-template-engine-1.15.1.1.0.5",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-user-import-3.6.6",
+    "from" : "mod-user-import-3.6.4",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-users-18.3.1.1.1.3",
+    "from" : "mod-users-18.1.2.1.0.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-selection-list-1.15.10",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-users-bl-7.3.0",
+    "from" : "mod-users-bl-7.1.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-worklists-2.11.5",
+    "from" : "mod-worklists-2.10.17",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "mod-z3950-3.2.0",
+    "from" : "mod-z3950-2.4.0",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "folio_orders-3.2.200000110",
+    "from" : "folio_orders-3.0.3",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "folio_agreements-8.3.100000186",
+    "from" : "folio_agreements-8.0.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "folio_plugin-find-po-line-3.2.10000021",
+    "from" : "folio_plugin-find-po-line-3.0.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "folio_finance-3.2.10000090",
+    "from" : "folio_finance-3.0.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "folio_invoice-3.2.30000065",
+    "from" : "folio_invoice-3.0.2",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "folio_receiving-2.2.10000045",
+    "from" : "folio_receiving-2.0.4",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "folio_data-export-5.2.30000051",
+    "from" : "folio_data-export-5.0.0",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "folio_inventory-es-6.4.100056",
+    "action" : "disable",
+    "stage" : "pending"
+  }, {
+    "id" : "folio_plugin-find-import-profile-5.2.10000029",
+    "from" : "folio_plugin-find-import-profile-5.0.0",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "folio_checkin-7.1.100000359",
+    "from" : "folio_checkin-6.0.1",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "folio_plugin-create-inventory-records-3.2.100000161",
+    "from" : "folio_plugin-create-inventory-records-3.0.0",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "edge-patron-4.10.0-SNAPSHOT.96",
+    "from" : "edge-patron-4.6.2",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "edge-sip2-2.3.0-SNAPSHOT.73",
+    "from" : "edge-sip2-2.1.2",
+    "action" : "enable",
+    "stage" : "pending"
+  }, {
+    "id" : "folio_circulation-7.1.100000882",
+    "from" : "folio_circulation-6.0.1",
+    "action" : "enable",
+    "stage" : "pending"
+  } ]
+} ]
