@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  org.naseej.auc.service.url: https://services.medadstg.com/auc-bib/api
+kind: ConfigMap
+metadata:
+  name: mod-codex-auc
+  namespace: folio

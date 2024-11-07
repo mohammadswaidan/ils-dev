@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mod-z3950
+  namespace: folio
+spec:
+  ports:
+    - name: http
+      port: 8081
+      protocol: TCP
+      targetPort: 9997
+  selector:
+    workload.user.cattle.io/workloadselector: deployment-folio-mod-z3950
+  sessionAffinity: None
+  type: ClusterIP

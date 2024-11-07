@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mod-data-export
+  namespace: folio
+spec:
+  ports:
+    - name: default
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    workload.user.cattle.io/workloadselector: deployment-folio-mod-data-export
+  sessionAffinity: None
+  type: ClusterIP

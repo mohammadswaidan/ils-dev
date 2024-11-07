@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mod-copycat
+  namespace: folio
+spec:
+  ports:
+    - name: default
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    workload.user.cattle.io/workloadselector: deployment-folio-mod-copycat
+  sessionAffinity: None
+  type: ClusterIP

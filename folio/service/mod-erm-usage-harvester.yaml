@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mod-erm-usage-harvester
+  namespace: folio
+spec:
+  ports:
+    - name: http
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    workload.user.cattle.io/workloadselector: deployment-folio-mod-erm-usage-harvester
+  sessionAffinity: None
+  type: ClusterIP
