@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  org.medad.sso.url: https://sso.medadstg.com
+kind: ConfigMap
+metadata:
+  name: mod-login-medad-sso
+  namespace: folio

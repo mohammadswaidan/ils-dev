@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mod-smart-cataloger
+  namespace: folio
+spec:
+  ports:
+    - name: http
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-folio-mod-smart-cataloger
+  sessionAffinity: None
+  type: ClusterIP

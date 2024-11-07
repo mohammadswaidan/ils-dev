@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mod-source-record-manager
+  namespace: folio
+spec:
+  minReadySeconds: 30
+  progressDeadlineSeconds: 300
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-folio-mod-source-record-manager
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-folio-mod-source-record-manager
+      namespace: folio
+    spec:
+      affinity:
+        podAffinity: {}
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - mod-source-record-manager
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+      containers:
+        - envFrom:
+            - secretRef:
+                name: db-connect
+                optional: false
+          image: jed.ocir.io/axhxgarudf1b/mod-source-record-manager:3.8.6.1.0.12
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /admin/health
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: mod-source-record-manager
+          readinessProbe:
+            failureThreshold: 20
+            httpGet:
+              path: /admin/health
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: "2"
+              memory: 10000Mi
+            requests:
+              cpu: 200m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: {}
+            privileged: false
+            procMount: Default
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          startupProbe:
+            failureThreshold: 90
+            httpGet:
+              path: /admin/health
+              port: 8081
+              scheme: HTTP
+            initialDelaySeconds: 600
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
+          stdin: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          tty: true
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: oracle-reg
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

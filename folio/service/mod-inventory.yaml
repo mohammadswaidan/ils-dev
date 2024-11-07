@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mod-inventory
+  namespace: folio
+spec:
+  ports:
+    - name: tcp
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    workload.user.cattle.io/workloadselector: deployment-folio-mod-inventory
+  sessionAffinity: None
+  type: ClusterIP

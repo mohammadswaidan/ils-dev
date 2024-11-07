@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  HV_URL: https://services.medadstg.com/heading-verification/api
+kind: ConfigMap
+metadata:
+  name: mod-heading-verification
+  namespace: folio

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mod-source-record-manager
+  namespace: folio
+spec:
+  ports:
+    - port: 8081
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    workload.user.cattle.io/workloadselector: deployment-folio-mod-source-record-manager
+  sessionAffinity: None
+  type: ClusterIP
