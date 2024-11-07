@@ -20,6 +20,8 @@ spec:
     spec:
       containers:
         - env:
+            - name: S3_BUCKET
+              value: ai-operations-stg
             - name: S3_URL_EXPIRY
               value: "300"
             - name: S3_OBJECT_EXPIRY
