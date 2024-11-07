@@ -1,7 +1,0 @@
-apiVersion: v1
-data:
-  medad.contentenrichment.service.url: https://services.medadstg.com/content-enrichment/api
-kind: ConfigMap
-metadata:
-  name: mod-content-enrichment
-  namespace: folio

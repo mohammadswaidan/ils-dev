@@ -1,7 +1,0 @@
-apiVersion: v1
-data:
-  medad.smartcataloger.service.url: https://services.medadstg.com/smart-cataloger/api
-kind: ConfigMap
-metadata:
-  name: mod-smart-cataloger
-  namespace: folio
